@@ -31,7 +31,10 @@ export const UserRegister = async (req, res, next) => {
       expiresIn: "7d",
     });
 
-    return res.status(200).json({ token, user: createdUser });
+    return res.status(200).json({
+      token,
+      user: { _id: createdUser._id, name: createdUser.name, email: createdUser.email, img: createdUser.img, age: createdUser.age },
+    });
   } catch (err) {
     next(err);
   }
@@ -59,7 +62,10 @@ export const UserLogin = async (req, res, next) => {
       expiresIn: "7d",
     });
 
-    return res.status(200).json({ token, user });
+    return res.status(200).json({
+      token,
+      user: { _id: user._id, name: user.name, email: user.email, img: user.img, age: user.age },
+    });
   } catch (err) {
     next(err);
   }
